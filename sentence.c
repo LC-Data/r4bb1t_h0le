@@ -53,9 +53,9 @@ void typist_fast(char sentence[150]){
 	printf("\n");
 }
 
-void main(){
-	
-	typist("Tell me, does the Matrix have you...? ");
+void rabbitHole(){
+
+	typist_fast("Tell me, does the Matrix have you...? ");
 	//printf("\n");
 	typist(GRN "The Matrix has us, we are lost..." reset);
 	typist("Hold on a bit longer, we are on the way.");
@@ -63,4 +63,49 @@ void main(){
 	sleep(1);
 	typist_fast("... BHT are you there?");
 	typist("Initiating forced communication relay. Standby. How long until we reach the core?");
+	sleep(2);
+	printf("\n");
+	
+}
+
+
+void menu(){
+	fflush(stdout);
+	int a;
+	fflush(stdout);
+    typist("What would you like to do?:\n");
+    fflush(stdout);
+    typist("1) Go down the Rabbit Hole\n");
+    fflush(stdout);
+    typist("2) Restart this application\n");
+    printf("\n");
+    fflush(stdout);
+    typist("The choice is yours: ");
+    fflush(stdout);
+    scanf("%d", &a);
+    fflush(stdout);
+    //printf("You entered: %d\n", a);
+	printf("\n");
+	fflush(stdout);
+    
+	if (a == 1) {
+		rabbitHole();
+	} else if (a == 2) {
+		menu();
+	} else {
+		menu();
+	}
+	
+}
+
+
+
+
+
+
+void main(){
+	
+	while (1){
+		menu();
+	}
 }
