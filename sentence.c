@@ -2,9 +2,28 @@
 #include <string.h>
 #include <unistd.h>
 #include "ANSI-color-codes.h"
+#include <stdlib.h>
+#include <stdbool.h>
+
+/*	Fun little CTF-style text game, focus on user io over network by serving the binary on an exposed port via nc
+ * also just brushing up on simple C and writing some neat functions.
+ * 
+ * 
+ * Todo: Put buffer checks on every input
+ * 			-Need to figure out appropriate buffer size for the typist functions in general
+ * 
+ * 		 Try and make it overall portable or at least very multi-terminal friendly
+ * 
+ */
+ 
+void clrscr()		//Is this the best portable way to clear the terminal... lol?
+{
+    system("cls 2>/dev/null");	//windows command, linux stderr redirection (in case you call cls on a *nix system, it will hide the error)
+    system("clear 2> nul");		//vice versa to above.
+}
+
 
 void typist(char sentence[150]){
-	
 	
 	int sentence_length;
 	char nextLetter;
@@ -20,20 +39,19 @@ void typist(char sentence[150]){
 			usleep(1075000);
 			fflush(stdout);
 		} else {	
-		
-		printf("%c", sentence[i]);
-		usleep(75000);
-		fflush(stdout);
+			printf("%c", sentence[i]);
+			usleep(75000);
+			fflush(stdout);
 		}
 	}
-	
-	//printf(" ");
+
 	usleep(1175000);
 	printf("\n");
 }
 
+
+
 void typist_fast(char sentence[150]){
-	
 	
 	int sentence_length;
 	char nextLetter;
@@ -45,42 +63,68 @@ void typist_fast(char sentence[150]){
 		printf("%c", sentence[i]);
 		usleep(75000);
 		fflush(stdout);
-	
 	}
 	
-	//printf(" ");
 	usleep(1175000);
 	printf("\n");
 }
 
+
+void typist_urgent(char sentence[150], bool lineBreak){
+	
+	int sentence_length;
+	char nextLetter;
+	
+	sentence_length = strlen(sentence);
+	
+	for (int i=0; i < sentence_length; i++) {
+		
+		printf("%c", sentence[i]);
+		usleep(25000);
+		fflush(stdout);
+	}
+	
+	usleep(875000);
+	if (lineBreak){
+		printf("\n");
+	}
+}
+
+
+
 void rabbitHole(){
 
-	typist_fast("Tell me, does the Matrix have you...? ");
-	//printf("\n");
+	typist_fast(HWHT "Tell me, does the Matrix have you...? " reset);
 	typist(GRN "The Matrix has us, we are lost..." reset);
-	typist("Hold on a bit longer, we are on the way.");
-	typist(GRN "It's too late, everything is fading. I'm pretty sure this is it, if it is then tell command tha" reset);
+	typist(HWHT "Just hold on a bit longer, we are on the way." reset);
+	typist(GRN "It's probably too late, everything is fading. I'm pretty sure this is it, if it is then tell command tha" reset);
 	sleep(1);
-	typist_fast("... BHT are you there?");
-	typist("Initiating forced communication relay. Standby. How long until we reach the core?");
+	typist(HWHT "... BHT are you there?" reset);
+	typist_urgent(HWHT "Initiating forced communication relay. " reset, false);
+	typist_urgent(HWHT "Standby... " reset, false);
+	sleep(1);
+	typist(HWHT "Lieutenant, how long until we reach the core?" reset); 
 	sleep(2);
-	printf("\n");
+	//printf("\n");
 	
 }
 
 
 void menu(){
+	
+	clrscr();
 	fflush(stdout);
 	int a;
 	fflush(stdout);
-    typist("What would you like to do?:\n");
+    typist_urgent("What would you like to do?:\n", true);
     fflush(stdout);
-    typist("1) Go down the Rabbit Hole\n");
+    typist_urgent("1) Go down the Rabbit Hole\n", false);
     fflush(stdout);
-    typist("2) Restart this application\n");
-    printf("\n");
+    typist_urgent("2) Restart this application\n", false);
     fflush(stdout);
-    typist("The choice is yours: ");
+    typist_urgent("3) Quit", true);
+    fflush(stdout);
+    typist_urgent("\nThe choice is yours: ", false);
     fflush(stdout);
     scanf("%d", &a);
     fflush(stdout);
@@ -92,14 +136,13 @@ void menu(){
 		rabbitHole();
 	} else if (a == 2) {
 		menu();
+	} else if (a ==3) {
+		exit(3);
 	} else {
 		menu();
 	}
 	
 }
-
-
-
 
 
 
