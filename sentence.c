@@ -57,11 +57,12 @@ void typist(char sentence[150]){
 		
 		if ("%c", sentence[i] == '.' || "%c", sentence[i] == ','){
 			printf("%c", sentence[i]);
+			fflush(stdout);
 			usleep(1075000);
 			continue;
 		}
 		
-		if (mistakePercent < 5 && i > 8 && i < sentence_length-9) {
+		if (mistakePercent < 4 && i > 8 && i < sentence_length-9) {
 			
 			whichLetter = rand() % 25;
 		
@@ -132,7 +133,7 @@ void typist_fast(char sentence[150]){
 			continue;
 		}
 		
-		if (mistakePercent < 5 && i > 8 && i < sentence_length-9) {
+		if (mistakePercent < 4 && i > 8 && i < sentence_length-9) {
 			
 			whichLetter = rand() % 25;
 		
@@ -203,7 +204,7 @@ void typist_urgent(char sentence[150], bool typos, bool lineBreak){
 			continue;
 		}
 		
-		if (mistakePercent < 5 && i > 8 && i < sentence_length-9) {
+		if (mistakePercent < 4 && i > 8 && i < sentence_length-9) {
 			
 			whichLetter = rand() % 25;
 		
@@ -227,7 +228,7 @@ void typist_urgent(char sentence[150], bool typos, bool lineBreak){
 				
 			for (int y=backspaces+1; y > 0; y--){
 				printf("\b \b");
-				usleep(225000);
+				usleep(75000);
 				fflush(stdout);
 				i--;
 			}
@@ -267,11 +268,25 @@ void rabbitHole(){
 
 void menu(){
 	
+	
+	
 	clrscr();
+	
+//	printf(RED "Hello" reset);
+	printf(RED "     )                            )      )               )                   (    (       \n" reset);  
+	printf(RED "  ( /(        (       *   )    ( /(   ( /(     *   )  ( /(         (  (      )\\ ) )\\ )    \n" reset);  
+	printf(RED "  )\\()) (     )\\    ` )  /(    )\\())  )\\())  ` )  /(  )\\()) (      )\\))(   '(()/((()/( (  \n" reset);
+	printf(RED " ((_)\\  )\\ ((((_)(   ( )(_))  ((_)\\  ((_)\\    ( )(_))((_)\\  )\\    ((_)()\\ )  /(_))/(_)))\\ \n" reset);  
+	printf(RED " _((_)((_) )\\ _ )\\ (_(_())     ((_)  _((_)  (_(_())  _((_)((_)   _(())\\_)()(_)) (_)) ((_)\n" reset);
+	printf(GRN "| || || __|  )_\\(  |_   _|    / _ \\ | \\| |  |_   _| | || || __|  \\ \\((_)/ /|_ _|| _ \\| __|\n" reset);
+	printf(GRN "| __ || _|  / _ \\    | |     | (_) || .` |    | |   | __ || _|    \\ \\/\\/ /  | | |   /| _|  \n" reset);
+	printf(GRN "|_||_||___|/_/ \\_\\   |_|      \\___/ |_|\\_|    |_|   |_||_||___|    \\_/\\_/  |___||_|_\\|___|\n" reset);
+
+	
 	fflush(stdout);
 	int a;
 	fflush(stdout);
-    typist_urgent("What would you like to do?:\n", false, true);
+    typist_urgent("\nWhat would you like to do?:\n", false, true);
     fflush(stdout);
     typist_urgent("1) Go down the Rabbit Hole\n", false, true);
     fflush(stdout);
