@@ -34,7 +34,7 @@ void clrscr()		//Is this the best portable way to clear the terminal... lol?
 }
 
 
-void typist(char sentence[150]){
+void typist(char sentence[250]){
 	
 	int sentence_length;
 	char nextLetter;
@@ -104,7 +104,7 @@ void typist(char sentence[150]){
 
 
 
-void typist_fast(char sentence[150]){
+void typist_fast(char sentence[250]){
 	
 	int sentence_length;
 	char nextLetter;
@@ -174,7 +174,7 @@ void typist_fast(char sentence[150]){
 }
 
 
-void typist_urgent(char sentence[150], bool typos, bool lineBreak){
+void typist_urgent(char sentence[250], bool typos, bool lineBreak){
 	
 	int sentence_length;
 	char nextLetter;
@@ -250,16 +250,16 @@ void typist_urgent(char sentence[150], bool typos, bool lineBreak){
 
 void rabbitHole(){
 
-	typist_fast(HWHT "Tell me, does the Matrix have you...? " reset);
-	typist(GRN "The Matrix has us, we are lost..." reset);
-	typist(HWHT "Just hold on a bit longer, we are on the way." reset);
-	typist(GRN "It's probably too late, everything is fading. I'm pretty sure this is it, if it is then tell command tha" reset);
+	typist_fast(HWHT "				Tell me, does the Matrix have you...? " reset);
+	typist_urgent(GRN "			        The Matrix has us, we are lost..." reset, true, true);
+	typist(HWHT "				Just hold on a bit longer, we are on the way." reset);
+	typist(GRN "				It's probably too late, everything is fading. I'm pretty sure this is it, if it is then tell command tha" reset);
 	sleep(1);
-	typist(HWHT "... BHT are you there?" reset);
-	typist_urgent(HWHT "Initiating forced communication relay. " reset, false, true);
-	typist_urgent(HWHT "Standby... " reset, false, true);
+	typist(HWHT "				... BHT are you there?" reset);
+	typist_urgent(HWHT "				Initiating forced communication relay. " reset, false, true);
+	typist_urgent(HWHT "				Standby... " reset, false, true);
 	sleep(1);
-	typist(HWHT "Lieutenant, how long until we reach the core?" reset); 
+	typist(HWHT "				Lieutenant, how long until we reach the core?" reset); 
 	sleep(2);
 	//printf("\n");
 	
@@ -278,28 +278,28 @@ void menu(){
 	printf(RED "  )\\()) (     )\\    ` )  /(    )\\())  )\\())  ` )  /(  )\\()) (      )\\))(   '(()/((()/( (  \n" reset);
 	printf(RED " ((_)\\  )\\ ((((_)(   ( )(_))  ((_)\\  ((_)\\    ( )(_))((_)\\  )\\    ((_)()\\ )  /(_))/(_)))\\ \n" reset);  
 	printf(RED " _((_)((_) )\\ _ )\\ (_(_())     ((_)  _((_)  (_(_())  _((_)((_)   _(())\\_)()(_)) (_)) ((_)\n" reset);
-	printf(GRN "| || || __|  )_\\(  |_   _|    / _ \\ | \\| |  |_   _| | || || __|  \\ \\((_)/ /|_ _|| _ \\| __|\n" reset);
-	printf(GRN "| __ || _|  / _ \\    | |     | (_) || .` |    | |   | __ || _|    \\ \\/\\/ /  | | |   /| _|  \n" reset);
+	printf(GRN "| || || __|  )_\\(  |_   _|    / _ \\ | \\| |  |_   _| | || || __|  \\ \\ \\/ / /|_ _|| _ \\| __|\n" reset);
+	printf(GRN "| __ || _|  / _ \\    | |     | (_) || .` |    | |   | __ || _|    \\ \\/\\/ /  | | | - /| _|  \n" reset);
 	printf(GRN "|_||_||___|/_/ \\_\\   |_|      \\___/ |_|\\_|    |_|   |_||_||___|    \\_/\\_/  |___||_|_\\|___|\n" reset);
 
 	
 	fflush(stdout);
 	int a;
 	fflush(stdout);
-    typist_urgent("\nWhat would you like to do?:\n", false, true);
+    typist_urgent("\n				What would you like to do?:\n", false, true);
     fflush(stdout);
-    typist_urgent("1) Go down the Rabbit Hole\n", false, true);
+    typist_urgent("				1) Go down the Rabbit Hole\n", false, true);
     fflush(stdout);
-    typist_urgent("2) Restart this application\n", false, true);
+    typist_urgent("				2) Restart this application\n", false, true);
     fflush(stdout);
-    typist_urgent("3) Quit", false, true);
+    typist_urgent("				3) Quit", false, true);
     fflush(stdout);
-    typist_urgent("\nThe choice is yours: ", false, true);
+    typist_urgent("\n				The choice is yours: ", false, false);
     fflush(stdout);
     scanf("%d", &a);
     fflush(stdout);
     //printf("You entered: %d\n", a);
-	printf("\n");
+	//printf("\n");
 	fflush(stdout);
     
 	if (a == 1) {
