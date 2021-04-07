@@ -251,7 +251,7 @@ void typist_urgent(char sentence[250], bool typos, bool lineBreak){
 void rabbitHole(){
 
 	typist_fast(HWHT "				Tell me, does the Matrix have you...? " reset);
-	typist_urgent(GRN "			        The Matrix has us, we are lost..." reset, true, true);
+	typist_urgent(GRN "		        	The Matrix has us, we are lost..." reset, true, true);
 	typist(HWHT "				Just hold on a bit longer, we are on the way." reset);
 	typist(GRN "				It's probably too late, everything is fading. I'm pretty sure this is it, if it is then tell command tha" reset);
 	sleep(1);
