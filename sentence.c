@@ -102,7 +102,7 @@ void typist_urgent(char sentence[150], bool typos, bool lineBreak){
 			continue;
 		}
 		
-		if (mistakePercent < 5 && i > 3 && i < sentence_length-3) {
+		if (mistakePercent < 5 && i > 3 && i < sentence_length-5) {
 			
 			whichLetter = rand() % 25;
 		
