@@ -15,7 +15,11 @@
  * 		 Try and make it overall portable or at least very multi-terminal friendly
  * 
  */
- 
+
+
+
+
+
 void clrscr()		//Is this the best portable way to clear the terminal... lol?
 {
     system("cls 2>/dev/null");	//windows command, linux stderr redirection (in case you call cls on a *nix system, it will hide the error)
@@ -70,14 +74,64 @@ void typist_fast(char sentence[150]){
 }
 
 
-void typist_urgent(char sentence[150], bool lineBreak){
+void typist_urgent(char sentence[150], bool typos, bool lineBreak){
 	
 	int sentence_length;
 	char nextLetter;
-	
+	char alphabet[26] = "abcdefghijklmnopqrstuvwxyz";
+	char typoLetter;
 	sentence_length = strlen(sentence);
+	int backspaces;				// This is the number of times the delete button will be hit to go back and fix a typo, makes it feel natural
+	int mistakePercent;			// I want this to be an int, 0 - 99, if it is <5 (so a 5% chance) then a typo will be made
+	int whichLetter;			// which letter the typo will be
 	
 	for (int i=0; i < sentence_length; i++) {
+		
+		mistakePercent = rand() % 99;	// random 0 - 99, see mistakePercent above
+		
+		
+		//printf("%i", mistakePercent);
+		//printf("\n");
+		//printf("%i", backspaces);
+		//printf("\n");
+		//printf("%i", whichLetter);
+		//printf("\n");
+		
+		if ("%c", sentence[i] == ' '){
+			printf("%c", sentence[i]);
+			continue;
+		}
+		
+		if (mistakePercent < 5 && i > 3 && i < sentence_length-3) {
+			
+			whichLetter = rand() % 25;
+		
+			backspaces = (rand() % 70)/10;
+			printf("%c", alphabet[whichLetter]);		//print the letter the typo will be
+			//printf("\nMISTAKE\n");
+			//printf("%i", i);
+			//printf("\nMISTAKE\n");
+			
+			fflush(stdout);
+			usleep(25000);
+			fflush(stdout);
+			i++;		// increment i so the next letter is still accurate
+			
+			for (int x=0; x < backspaces; x++){		// This is the very next letter for backspaces number of letters
+				printf("%c", sentence[i]);
+				usleep(25000);
+				fflush(stdout);
+				i++;
+			}
+				
+			for (int y=backspaces+1; y > 0; y--){
+				printf("\b \b");
+				usleep(225000);
+				fflush(stdout);
+				i--;
+			}
+			
+		}
 		
 		printf("%c", sentence[i]);
 		usleep(25000);
@@ -100,8 +154,8 @@ void rabbitHole(){
 	typist(GRN "It's probably too late, everything is fading. I'm pretty sure this is it, if it is then tell command tha" reset);
 	sleep(1);
 	typist(HWHT "... BHT are you there?" reset);
-	typist_urgent(HWHT "Initiating forced communication relay. " reset, false);
-	typist_urgent(HWHT "Standby... " reset, false);
+	typist_urgent(HWHT "Initiating forced communication relay. " reset, false, true);
+	typist_urgent(HWHT "Standby... " reset, false, true);
 	sleep(1);
 	typist(HWHT "Lieutenant, how long until we reach the core?" reset); 
 	sleep(2);
@@ -116,15 +170,15 @@ void menu(){
 	fflush(stdout);
 	int a;
 	fflush(stdout);
-    typist_urgent("What would you like to do?:\n", true);
+    typist_urgent("What would you like to do?:\n", true, true);
     fflush(stdout);
-    typist_urgent("1) Go down the Rabbit Hole\n", false);
+    typist_urgent("1) Go down the Rabbit Hole\n", false, true);
     fflush(stdout);
-    typist_urgent("2) Restart this application\n", false);
+    typist_urgent("2) Restart this application\n", false, true);
     fflush(stdout);
-    typist_urgent("3) Quit", true);
+    typist_urgent("3) Quit", true, true);
     fflush(stdout);
-    typist_urgent("\nThe choice is yours: ", false);
+    typist_urgent("\nThe choice is yours: ", false, true);
     fflush(stdout);
     scanf("%d", &a);
     fflush(stdout);
