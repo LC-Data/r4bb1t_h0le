@@ -27,6 +27,8 @@
 
 
 
+
+
 void clrscr()		//Is this the best portable way to clear the terminal... lol?
 {
     system("cls 2>/dev/null");	//windows command, linux stderr redirection (in case you call cls on a *nix system, it will hide the error)
@@ -246,20 +248,55 @@ void typist_urgent(char sentence[250], bool typos, bool lineBreak){
 	}
 }
 
+void colourFade(){
+	
+	for (int i=16; i < 22; i++) {
+
+		printf("\033[38;5;");
+		printf("%i",i);
+		printf(";82m");
+		printf("a");
+		printf("\033[0m");
+		//printf("\n");
+		usleep(7500);
+		fflush(stdout);
+	}
+	
+	for (int x=21; x > 15; x--) {
+	
+		printf("\033[38;5;");
+		printf("%i",x);
+		printf(";82m");
+		printf("a");
+		printf("\033[0m");
+		//printf("\n");
+		usleep(7500);
+		fflush(stdout);
+	}
+		
+}
 
 
 void rabbitHole(){
 
 	typist_fast(HWHT "				Tell me, does the Matrix have you...? " reset);
+	printf("\n");
 	typist_urgent(GRN "		        	The Matrix has us, we are lost..." reset, true, true);
+	printf("\n");
 	typist(HWHT "				Just hold on a bit longer, we are on the way." reset);
+	printf("\n");
 	typist(GRN "				It's probably too late, everything is fading. I'm pretty sure this is it, if it is then tell command tha" reset);
+	printf("\n");
 	sleep(1);
 	typist(HWHT "				... BHT are you there?" reset);
+	printf("\n");
 	typist_urgent(HWHT "				Initiating forced communication relay. " reset, false, true);
+	printf("\n");
 	typist_urgent(HWHT "				Standby... " reset, false, true);
+	printf("\n");
 	sleep(1);
 	typist(HWHT "				Lieutenant, how long until we reach the core?" reset); 
+	printf("\n");
 	sleep(2);
 	//printf("\n");
 	
@@ -296,6 +333,16 @@ void menu(){
     fflush(stdout);
     typist_urgent("\n				The choice is yours: ", false, false);
     fflush(stdout);
+    printf("\n");
+    colourFade();
+    colourFade();
+    colourFade();
+    colourFade();
+    colourFade();
+    colourFade();
+    colourFade();
+    colourFade();
+    printf("\n");
     scanf("%d", &a);
     fflush(stdout);
     //printf("You entered: %d\n", a);
